@@ -12,7 +12,7 @@
 %bcond_without bundled_gtest
 
 %global git_name FreeCAD
-%global wcvrev   %%tag%%
+%global wcvrev   weekly
 %global wcurl    https://github.com/FreeCAD/FreeCAD.git
 %global wcdate   21/04/25
 %global version_cleaned %{lua: print((rpm.expand("%{wcvrev}"):gsub("-", ".")))}
@@ -27,7 +27,7 @@ Group:          Applications/Engineering
 License:        GPL-2.0-or-later
 URL:            https://www.freecad.org/
 
-Source0:        https://github.com/FreeCAD/FreeCAD/archive/refs/tags/%{wcvrev}.zip
+Source0:        https://github.com/FreeCAD/FreeCAD-Bundle/releases/download/weekly-builds/freecad_source.tar.gz
 
 %if %{with bundled_smesh}
 # See /src/3rdParty/salomesmesh/CMakeLists.txt to find this out.
@@ -111,10 +111,11 @@ Requires:       %{name} = %{epoch}:%{version}-%{release}
 
 
 #path that contain main FreeCAD sources for cmake
-%global _vpath_srcdir  %_builddir/%{git_name}-%wcvrev
+%global _vpath_srcdir  %_builddir/%{git_name}
 %global tests_resultdir %{_datadir}/%{name}/%{_arch}/tests_result
 %prep
-    %setup -T -b 0 -q -n %{git_name}-%wcvrev
+    rm -rf %{git_name}
+    %setup -T -a 0 -q -c -D -n %{git_name}
 
 %build
     cd %_builddir
