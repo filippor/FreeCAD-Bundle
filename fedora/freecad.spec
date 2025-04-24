@@ -15,7 +15,7 @@
 %global wcvrev   weekly-2025.04.21
 %global wcurl    https://github.com/FreeCAD/FreeCAD.git
 %global wcdate   21/04/25
-Name:           freecad
+Name:           freecad-weekly
 
 Epoch:          1
 Version:        1.1.0~weekly-2025.04.21
